@@ -58,11 +58,11 @@
 
         <ImageView
             android:id="@+id/statusImage"
-            android:layout_width="130sp"
-            android:layout_height="130sp"
-            android:contentDescription="statusImage"
+            android:layout_width="110sp"
+            android:layout_height="110sp"
             android:layout_above="@+id/temperatureContainer"
             android:layout_centerInParent="true"
+            android:contentDescription="statusImage"
             android:src="@drawable/partly_cloudy">
 
         </ImageView>
@@ -82,7 +82,7 @@
                 android:fontFamily="sans-serif"
                 android:gravity="center"
                 android:text="0°C"
-                android:textSize="90sp">
+                android:textSize="80sp">
 
             </TextView>
 
@@ -124,6 +124,7 @@
             </TextView>
         </LinearLayout>
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewBottom"
             android:layout_width="match_parent"
             android:layout_height="60sp"
             android:layout_alignParentBottom="true">
@@ -141,6 +142,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="Enter Your City"
+                        android:textColorHint="@color/black"
+                        android:textColor="@color/black"
                         android:drawableStart="@drawable/search_24px"
                         android:background="@color/white"
                         android:drawablePadding="15dp"
@@ -151,6 +154,148 @@
                 </androidx.cardview.widget.CardView>
 
             </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/cardViewBottom"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            app:cardCornerRadius="15sp"
+            android:padding="5sp">
+            <RelativeLayout
+                android:id="@+id/belowContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_clear_sky">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_margin="5sp"
+                        android:gravity="center"
+                        app:cardCornerRadius="15sp">
+                        <LinearLayout
+                            android:id="@+id/pressureContainer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:background="@drawable/background_clear_sky">
+                            <ImageView
+                                android:contentDescription="Pressure"
+                                android:src="@drawable/compress_48px"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center">
+
+                            </ImageView>
+                            <TextView
+                                android:text="Pressure"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center">
+
+                            </TextView>
+                            <TextView
+                                android:id="@+id/pressureLabel"
+                                android:text = "100"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center">
+
+                            </TextView>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_margin="5sp"
+                        android:gravity="center"
+                        app:cardCornerRadius="15sp">
+                        <LinearLayout
+                            android:id="@+id/windContainer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:background="@drawable/background_clear_sky">
+                            <ImageView
+                                android:contentDescription="Wind"
+                                android:src="@drawable/air_48px"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center">
+
+                            </ImageView>
+                            <TextView
+                                android:text="Wind(m/s)"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center">
+
+                            </TextView>
+                            <TextView
+                                android:id="@+id/windLabel"
+                                android:text = "100"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center">
+
+                            </TextView>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_margin="5sp"
+                        android:gravity="center"
+                        app:cardCornerRadius="15sp">
+                    <LinearLayout
+                        android:id="@+id/minTempContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/background_clear_sky">
+                        <ImageView
+                            android:contentDescription="Mininum Temperature"
+                            android:src="@drawable/temperature_48px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center">
+
+                        </ImageView>
+                        <TextView
+                            android:text="Min Temp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center">
+
+                        </TextView>
+                        <TextView
+                            android:id="@+id/minTempLabel"
+                            android:text = "100"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center">
+
+                        </TextView>
+                    </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+            </RelativeLayout>
+
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
 </LinearLayout>

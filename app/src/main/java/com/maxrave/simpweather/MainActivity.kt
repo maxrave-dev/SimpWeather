@@ -44,7 +44,16 @@ class MainActivity : AppCompatActivity() {
     var statusImage: ImageView? = null
     var updateAtLabel: TextView? = null
     var temperatureDetailsLabel: TextView? = null
+    var pressureLabel: TextView? = null
+    var windLabel: TextView? = null
+    var minTempLabel: TextView? = null
+    //View
     var mainContainer: View? = null
+    var bottomBarSearch: View? = null
+    var belowContainer: View? = null
+    var pressureContainer: View? = null
+    var windContainer: View? = null
+    var minTempContainer: View? = null
     //var lat:Double = 0.0
     //var lon:Double = 0.0
     val weatherApi:String = "3515881a191de08773dc204279843606"
@@ -87,6 +96,14 @@ class MainActivity : AppCompatActivity() {
         updateAtLabel = findViewById(R.id.updateAtLabel)
         mainContainer = findViewById(R.id.mainContainer)
         temperatureDetailsLabel = findViewById(R.id.temperatureDetailsLabel)
+        bottomBarSearch = findViewById(R.id.bottomBar)
+        pressureLabel = findViewById(R.id.pressureLabel)
+        windLabel = findViewById(R.id.windLabel)
+        minTempLabel = findViewById(R.id.minTempLabel)
+        belowContainer = findViewById(R.id.belowContainer)
+        pressureContainer = findViewById(R.id.pressureContainer)
+        windContainer = findViewById(R.id.windContainer)
+        minTempContainer = findViewById(R.id.minTempContainer)
     }
     val REQUEST_CODE_LOCATION_PERMISSION = 100
 
@@ -142,6 +159,11 @@ class MainActivity : AppCompatActivity() {
                 val status = weather.getString("main")
                 if (hour in 6..18) { //day
                     mainContainer?.setBackgroundResource(R.drawable.background_clear_sky)
+                    bottomBarSearch?.setBackgroundResource(R.drawable.background_clear_sky)
+                    belowContainer?.setBackgroundResource(R.drawable.background_clear_sky)
+                    pressureContainer?.setBackgroundResource(R.drawable.background_clear_sky)
+                    windContainer?.setBackgroundResource(R.drawable.background_clear_sky)
+                    minTempContainer?.setBackgroundResource(R.drawable.background_clear_sky)
                     if (statusId.toInt() in 200..232) {
                         statusImage?.setImageResource(R.drawable.rainthunder)
                     } else if (statusId.toInt() in 300..321 && statusId.toInt() in 500..531) {
@@ -156,6 +178,11 @@ class MainActivity : AppCompatActivity() {
                 }
                 else{ //night
                     mainContainer?.setBackgroundResource(R.drawable.background_night_sky)
+                    bottomBarSearch?.setBackgroundResource(R.drawable.background_night_sky)
+                    belowContainer?.setBackgroundResource(R.drawable.background_night_sky)
+                    pressureContainer?.setBackgroundResource(R.drawable.background_night_sky)
+                    windContainer?.setBackgroundResource(R.drawable.background_night_sky)
+                    minTempContainer?.setBackgroundResource(R.drawable.background_night_sky)
                     if (statusId.toInt() in 200..232) {
                         statusImage?.setImageResource(R.drawable.rainthunder_night)
                     } else if (statusId.toInt() in 300..321 && statusId.toInt() in 500..531) {
@@ -176,6 +203,13 @@ class MainActivity : AppCompatActivity() {
                 val sys = jsonObj.getJSONObject("sys")
                 val country = sys.getString("country")
                 locationLabel?.text = "$city, $country"
+                //bottom
+                var minTemp:String = Math.round(((main.getString("temp_min").toDouble())*10)/10).toString()
+                minTempLabel?.text = "$minTemp °C"
+                var winSpeed:String = jsonObj.getJSONObject("wind").getString("speed")
+                windLabel?.text = "$winSpeed m/s"
+                var pressure:String = main.getString("pressure")
+                pressureLabel?.text = "$pressure hPa"
             },
             { error -> Log.d("Error.Response", error.toString())})
         requestQueue.add(stringRequest)
