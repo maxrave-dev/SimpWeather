@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="0sp"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/mainContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/background_clear_sky"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:id="@+id/locationContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="25sp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/locationLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Location"
+                android:textSize="30sp">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/statusLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="Status"
+                android:textSize="20sp">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/updateAtLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Updated at: 12PM"
+                android:textSize="11sp">
+
+            </TextView>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/statusImage"
+            android:layout_width="130sp"
+            android:layout_height="130sp"
+            android:contentDescription="statusImage"
+            android:layout_above="@+id/temperatureContainer"
+            android:layout_centerInParent="true"
+            android:src="@drawable/partly_cloudy">
+
+        </ImageView>
+
+        <LinearLayout
+            android:id="@+id/temperatureContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/temperatureLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:text="0°C"
+                android:textSize="90sp">
+
+            </TextView>
+
+            <LinearLayout
+                android:id="@+id/temperatureDetailsContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/realFeelLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5sp"
+                    android:text="Real Feel: -5°C">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/humidityLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5sp"
+                    android:text="Humidity: 50%">
+
+                </TextView>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/temperatureDetailsLabel"
+                android:text="Description"
+                android:textSize="15sp"
+                android:fontFamily="sans-serif-light"
+                android:layout_margin="15sp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </TextView>
+        </LinearLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="60sp"
+            android:layout_alignParentBottom="true">
+            <RelativeLayout
+                android:id="@+id/bottomBar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_clear_sky">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="60sp"
+                    android:layout_margin="8sp"
+                    android:layout_centerInParent="true">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Enter Your City"
+                        android:drawableStart="@drawable/search_24px"
+                        android:background="@color/white"
+                        android:drawablePadding="15dp"
+                        android:layout_margin="3sp">
+
+                    </EditText>
+
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+</LinearLayout>
