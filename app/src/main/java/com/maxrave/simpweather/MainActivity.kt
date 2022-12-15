@@ -2,6 +2,7 @@ package com.maxrave.simpweather
 
 import android.Manifest
 import android.Manifest.permission.ACCESS_FINE_LOCATION
+import android.app.Activity
 import android.app.DownloadManager.Request
 import android.content.Context
 import android.content.Intent
@@ -15,6 +16,7 @@ import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import androidx.appcompat.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -26,6 +28,10 @@ import com.android.volley.toolbox.Volley
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.Task
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.maxrave.simpweather.Model.citiesModelClass
+import org.json.JSONArray
+import org.json.JSONException
 import org.json.JSONObject
 import java.net.URL
 import java.time.LocalDateTime
@@ -47,27 +53,66 @@ class MainActivity : AppCompatActivity() {
     var pressureLabel: TextView? = null
     var windLabel: TextView? = null
     var minTempLabel: TextView? = null
+    var fab: FloatingActionButton? = null
     //View
     var mainContainer: View? = null
-    var bottomBarSearch: View? = null
     var belowContainer: View? = null
     var pressureContainer: View? = null
     var windContainer: View? = null
     var minTempContainer: View? = null
+    var listCities: ArrayList<citiesModelClass> = ArrayList()
     //var lat:Double = 0.0
     //var lon:Double = 0.0
     val weatherApi:String = "3515881a191de08773dc204279843606"
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-
+    val  AUTOCOMPLETE_REQUEST_CODE = 101
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
-
+//        createCitiesList(listCities)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         mapping()
         getWeather()
+        fab?.setOnClickListener() {
+        }
     }
+//    fun createCitiesList(listCities: ArrayList<citiesModelClass>) {
+//        try{
+//            val obj = JSONObject(getJSONFromAssets()!!)
+//            val cities = obj.getJSONArray("cities")
+//            for (i in 0..cities.length() - 1) {
+//                val city = cities.getJSONObject(i)
+//                val id = city.getInt("id")
+//                val name = city.getString("name")
+//                val state_id = city.getInt("state_id")
+//                val state_code = city.getString("state_code")
+//                val state_name = city.getString("state_name")
+//                val country_id = city.getInt("country_id")
+//                val country_code = city.getString("country_code")
+//                val country_name = city.getString("country_name")
+//                val latitude = city.getString("latitude")
+//                val longitude = city.getString("longitude")
+//                val wikiDataId = city.getString("wikiDataId")
+//                listCities.add(citiesModelClass(id, name, state_id, state_code, state_name, country_id, country_code, country_name, latitude, longitude, wikiDataId))
+//            }
+//        } catch (e: JSONException) {
+//            //exception
+//            e.printStackTrace()
+//        }
+//    }
+//
+//    private fun getJSONFromAssets(): String? {
+//        var json: String? = null
+//        try {
+//            val inputStream = assets.open("cities.json")
+//            json = inputStream.bufferedReader().use { it.readText() }
+//        } catch (ex: Exception) {
+//            ex.printStackTrace()
+//            return null
+//        }
+//        return json
+//    }
 
     private fun fetchLocation(locationNow: MutableList<String>) {
         val task: Task<Location> = fusedLocationProviderClient.lastLocation
@@ -96,7 +141,7 @@ class MainActivity : AppCompatActivity() {
         updateAtLabel = findViewById(R.id.updateAtLabel)
         mainContainer = findViewById(R.id.mainContainer)
         temperatureDetailsLabel = findViewById(R.id.temperatureDetailsLabel)
-        bottomBarSearch = findViewById(R.id.bottomBar)
+        fab = findViewById(R.id.fab)
         pressureLabel = findViewById(R.id.pressureLabel)
         windLabel = findViewById(R.id.windLabel)
         minTempLabel = findViewById(R.id.minTempLabel)
@@ -159,11 +204,10 @@ class MainActivity : AppCompatActivity() {
                 val status = weather.getString("main")
                 if (hour in 6..18) { //day
                     mainContainer?.setBackgroundResource(R.drawable.background_clear_sky)
-                    bottomBarSearch?.setBackgroundResource(R.drawable.background_clear_sky)
-                    belowContainer?.setBackgroundResource(R.drawable.background_clear_sky)
-                    pressureContainer?.setBackgroundResource(R.drawable.background_clear_sky)
-                    windContainer?.setBackgroundResource(R.drawable.background_clear_sky)
-                    minTempContainer?.setBackgroundResource(R.drawable.background_clear_sky)
+                    belowContainer?.setBackgroundResource(R.drawable.background_clear_sky_reverse)
+                    pressureContainer?.setBackgroundResource(R.drawable.background_clear_sky_reverse)
+                    windContainer?.setBackgroundResource(R.drawable.background_clear_sky_reverse)
+                    minTempContainer?.setBackgroundResource(R.drawable.background_clear_sky_reverse)
                     if (statusId.toInt() in 200..232) {
                         statusImage?.setImageResource(R.drawable.rainthunder)
                     } else if (statusId.toInt() in 300..321 && statusId.toInt() in 500..531) {
@@ -178,11 +222,10 @@ class MainActivity : AppCompatActivity() {
                 }
                 else{ //night
                     mainContainer?.setBackgroundResource(R.drawable.background_night_sky)
-                    bottomBarSearch?.setBackgroundResource(R.drawable.background_night_sky)
-                    belowContainer?.setBackgroundResource(R.drawable.background_night_sky)
-                    pressureContainer?.setBackgroundResource(R.drawable.background_night_sky)
-                    windContainer?.setBackgroundResource(R.drawable.background_night_sky)
-                    minTempContainer?.setBackgroundResource(R.drawable.background_night_sky)
+                    belowContainer?.setBackgroundResource(R.drawable.background_night_sky_reverse)
+                    pressureContainer?.setBackgroundResource(R.drawable.background_night_sky_reverse)
+                    windContainer?.setBackgroundResource(R.drawable.background_night_sky_reverse)
+                    minTempContainer?.setBackgroundResource(R.drawable.background_night_sky_reverse)
                     if (statusId.toInt() in 200..232) {
                         statusImage?.setImageResource(R.drawable.rainthunder_night)
                     } else if (statusId.toInt() in 300..321 && statusId.toInt() in 500..531) {
