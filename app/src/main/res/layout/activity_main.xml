@@ -4,11 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="0sp"
     android:orientation="vertical"
     tools:ignore="HardcodedText"
     tools:context=".MainActivity">
-
     <RelativeLayout
         android:id="@+id/mainContainer"
         android:layout_width="match_parent"
@@ -18,6 +16,27 @@
         android:background="@drawable/background_clear_sky"
         android:visibility="visible">
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="35sp"
+            android:layout_marginEnd="10sp"
+            android:background="@android:color/transparent"
+            android:outlineProvider="none"
+            android:src="@drawable/add_24px"
+            android:tint="@null"
+            app:backgroundTint="@android:color/transparent"
+            app:backgroundTintMode="@null"
+            app:borderWidth="0dp"
+            app:elevation="0dp"
+            app:fabSize="mini"
+            app:pressedTranslationZ="0sp"
+            app:rippleColor="@null"
+            android:contentDescription="ADD">
+
+        </com.google.android.material.floatingactionbutton.FloatingActionButton>
         <LinearLayout
             android:id="@+id/locationContainer"
             android:layout_width="match_parent"
@@ -123,52 +142,26 @@
 
             </TextView>
         </LinearLayout>
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardViewBottom"
-            android:layout_width="match_parent"
-            android:layout_height="60sp"
-            android:layout_alignParentBottom="true">
-            <RelativeLayout
-                android:id="@+id/bottomBar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/background_clear_sky">
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="60sp"
-                    android:layout_margin="8sp"
-                    android:layout_centerInParent="true">
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:hint="Enter Your City"
-                        android:textColorHint="@color/black"
-                        android:textColor="@color/black"
-                        android:drawableStart="@drawable/search_24px"
-                        android:background="@color/white"
-                        android:drawablePadding="15dp"
-                        android:layout_margin="3sp">
 
-                    </EditText>
-
-                </androidx.cardview.widget.CardView>
-
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@id/cardViewBottom"
+            android:layout_alignParentBottom="true"
             android:layout_marginLeft="10sp"
             android:layout_marginRight="10sp"
             app:cardCornerRadius="15sp"
             android:padding="5sp">
+
+
+
             <RelativeLayout
                 android:id="@+id/belowContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_clear_sky">
+                android:background="@drawable/background_clear_sky_reverse">
+
                 <LinearLayout
+                    android:id="@+id/detailsContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -187,7 +180,7 @@
                             android:orientation="vertical"
                             android:layout_gravity="center"
                             android:layout_weight="1"
-                            android:background="@drawable/background_clear_sky">
+                            android:background="@drawable/background_clear_sky_reverse">
                             <ImageView
                                 android:contentDescription="Pressure"
                                 android:src="@drawable/compress_48px"
@@ -227,7 +220,7 @@
                             android:orientation="vertical"
                             android:layout_gravity="center"
                             android:layout_weight="1"
-                            android:background="@drawable/background_clear_sky">
+                            android:background="@drawable/background_clear_sky_reverse">
                             <ImageView
                                 android:contentDescription="Wind"
                                 android:src="@drawable/air_48px"
@@ -267,7 +260,7 @@
                         android:orientation="vertical"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:background="@drawable/background_clear_sky">
+                        android:background="@drawable/background_clear_sky_reverse">
                         <ImageView
                             android:contentDescription="Mininum Temperature"
                             android:src="@drawable/temperature_48px"
