@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,10 +18,13 @@ import com.android.volley.toolbox.Volley
 import com.maxrave.simpweather.Model.GeonameAdapter
 import com.maxrave.simpweather.Model.GeonameX
 import org.json.JSONObject
+import java.time.ZoneId
+import java.time.ZonedDateTime
 
 class SearchCityActivity : AppCompatActivity() {
     var searchCityView: SearchView? = null
     var listCityView: RecyclerView? = null
+    var searchCityActivity: View? = null
     lateinit var listCity : ArrayList<GeonameX>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -119,8 +124,20 @@ class SearchCityActivity : AppCompatActivity() {
     }
 
     private fun mapping(){
+        searchCityActivity = findViewById(R.id.search_activity)
         listCityView = findViewById<RecyclerView>(R.id.list_cities)
         searchCityView = findViewById<SearchView>(R.id.search_view)
+        var timeNow = ZonedDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh"))
+        var hour = timeNow.hour
+        if (hour in 6..18){
+            searchCityActivity?.setBackgroundResource(R.drawable.background_clear_sky)
+            listCityView?.setBackgroundResource(R.drawable.background_clear_sky)
+        }
+        else
+        {
+            searchCityActivity?.setBackgroundResource(R.drawable.background_night_sky)
+            listCityView?.setBackgroundResource(R.drawable.background_night_sky)
+        }
         listCity = ArrayList()
     }
 //    private fun callApi(location: String, listCity: ArrayList<GeonameX>){
